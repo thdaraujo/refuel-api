@@ -9,7 +9,8 @@ defmodule RefuelAPIWeb.FallbackController do
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> render(RefuelAPIWeb.ChangesetView, "error.json", changeset: changeset)
+    # |> render(RefuelAPIWeb.ChangesetView, "error.json", changeset: changeset)
+    |> render(RefuelAPIWeb.ErrorView, :"422")
   end
 
   def call(conn, {:error, :not_found}) do
