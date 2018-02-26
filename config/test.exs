@@ -17,3 +17,6 @@ config :refuel_api, RefuelAPI.Repo,
   database: "refuel_api_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# bcrypt
+config :bcrypt_elixir, :log_rounds, 4

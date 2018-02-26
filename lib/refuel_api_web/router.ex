@@ -5,7 +5,8 @@ defmodule RefuelAPIWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", RefuelAPIWeb do
+  scope "/api/v1", RefuelAPIWeb do
     pipe_through :api
+    resources "/users", UserController, only: [:create, :show]
   end
 end
