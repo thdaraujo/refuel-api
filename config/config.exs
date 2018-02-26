@@ -26,3 +26,8 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# Guardian config
+config :refuel_api, RefuelAPI.Guardian,
+       issuer: "refuel_api",
+       secret_key: "D4OckXwoR+DWcX2ekqc04Oxs7T2kR8p5He8eu7mSt5UcPnfkKqY1HYJJdX6Y4CMh"
