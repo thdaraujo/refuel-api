@@ -22,7 +22,6 @@ defmodule RefuelAPIWeb do
       use Phoenix.Controller, namespace: RefuelAPIWeb
       import Plug.Conn
       import RefuelAPIWeb.Router.Helpers
-      import RefuelAPIWeb.Gettext
     end
   end
 
@@ -36,7 +35,6 @@ defmodule RefuelAPIWeb do
 
       import RefuelAPIWeb.Router.Helpers
       import RefuelAPIWeb.ErrorHelpers
-      import RefuelAPIWeb.Gettext
     end
   end
 
@@ -51,7 +49,6 @@ defmodule RefuelAPIWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import RefuelAPIWeb.Gettext
     end
   end
 
