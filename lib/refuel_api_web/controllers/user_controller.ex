@@ -3,8 +3,19 @@ defmodule RefuelAPIWeb.UserController do
 
   alias RefuelAPI.Accounts
   alias RefuelAPI.Accounts.User
+  alias RefuelAPI.Guardian
 
   action_fallback RefuelAPIWeb.FallbackController
+
+  def sign_in(conn, %{"email" => email, "password" => password}) do
+    case Accounts.token_sign_in(email, password) do
+      {:ok, token, _claims} ->
+        conn
+        |> render("jwt.json", jwt: token)
+      _ ->
+        {:error, :unauthorized}
+    end
+  end
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -20,9 +31,14 @@ defmodule RefuelAPIWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
-    render(conn, "show.json", user: user)
+  def show(conn, _params) do
+    if Guardian.Plug.authenticated?(conn) do
+      user = Guardian.Plug.current_resource(conn)
+      conn
+      |> render("user.json", user: user)
+    else
+      {:error, :unauthenticated}
+    end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
